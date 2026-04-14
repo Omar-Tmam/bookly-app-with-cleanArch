@@ -7,7 +7,7 @@ class FetchFeaturedBooksUseCase {
   final HomeRepo homeRepo;
 
   FetchFeaturedBooksUseCase(this.homeRepo);
-  Future<Either<Failure,List<BookEntity>>> fetchFeaturedBooks(){
+  Future<Either<Failure,List<BookEntity>>> call(){
     return homeRepo.fetchFeaturedBooks();
   }
 }
