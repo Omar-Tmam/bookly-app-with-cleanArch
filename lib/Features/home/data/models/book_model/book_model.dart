@@ -25,12 +25,12 @@ class BookModel extends BookEntity {
     this.accessInfo,
     this.searchInfo,
   }) : super(
-         bookId: id,
-         img: volumeInfo?.imageLinks?.thumbnail,
-         title: volumeInfo?.title,
-         author: volumeInfo?.authors?.first,
+         bookId: id?? 'No Id',
+         img: volumeInfo?.imageLinks?.thumbnail?? 'No Image',
+         title: volumeInfo?.title?? 'No Title',
+         author: volumeInfo?.authors?.first?? 'No Author',
          price: 0,
-         rating: volumeInfo?.averageRating,
+         rating: volumeInfo?.averageRating?? 0,
        );
 
   factory BookModel.fromJson(Map<String, dynamic> json) => BookModel(
