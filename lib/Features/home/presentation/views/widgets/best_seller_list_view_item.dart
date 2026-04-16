@@ -1,4 +1,3 @@
-
 import 'package:bookly_clean_arch/core/utils/app_router.dart' show AppRouter;
 import 'package:flutter/material.dart';
 
@@ -26,19 +25,16 @@ class BookListViewItem extends StatelessWidget {
               aspectRatio: 2.5 / 4,
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.red,
-                    image: const DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                        AssetsData.testImage,
-                      ),
-                    )),
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.red,
+                  image: const DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(AssetsData.testImage),
+                  ),
+                ),
               ),
             ),
-            const SizedBox(
-              width: 30,
-            ),
+            const SizedBox(width: 30),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,16 +50,9 @@ class BookListViewItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  const Text(
-                    'J.K. Rowling',
-                    style: Styles.textStyle14,
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
+                  const SizedBox(height: 3),
+                  const Text('J.K. Rowling', style: Styles.textStyle14),
+                  const SizedBox(height: 3),
                   Row(
                     children: [
                       Text(
