@@ -1,6 +1,8 @@
 import 'package:bookly_clean_arch/Features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_clean_arch/Features/home/domain/entities/book_entity.dart';
+import 'package:bookly_clean_arch/constants.dart';
 import 'package:bookly_clean_arch/core/utils/api_service.dart';
+import 'package:hive/hive.dart';
 
 abstract class HomeRemoteDataSoure {
   Future<List<BookEntity>> fetchFeaturedBooks();
@@ -17,8 +19,11 @@ class HomeRemoteDataSoureImpl extends HomeRemoteDataSoure {
 
     var data = await apiService.get(endPoint: 'volumes?filter=free-ebooks&q=programming');
     getBooksList(data, books);
+    await saveData(books, kFeaturedBox);
     return books;
   }
+
+
 
   @override
   Future<List<BookEntity>> fetchNewestBooks() async {
@@ -28,6 +33,7 @@ class HomeRemoteDataSoureImpl extends HomeRemoteDataSoure {
       endPoint: 'volumes?filter=free-ebooks&q=programming&sorting=newest',
     );
     getBooksList(data, books);
+    await saveData(books, kNewestBox);
     return books;
   }
 }
@@ -37,3 +43,7 @@ void getBooksList(Map<String, dynamic> data, List<BookEntity> books) {
     books.add(BookModel.fromJson(item));
   }
 }
+  Future<void> saveData(List<BookEntity> books,String boxName) async {
+    var box = Hive.box(boxName);
+    await box.addAll(books);
+  }
