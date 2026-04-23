@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:bloc/bloc.dart';
 import 'package:bookly_clean_arch/Features/home/domain/entities/book_entity.dart';
 import 'package:bookly_clean_arch/Features/home/domain/use_cases/fetch_featured_books_use_case.dart';
