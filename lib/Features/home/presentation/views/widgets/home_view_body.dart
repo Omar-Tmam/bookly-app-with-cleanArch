@@ -1,5 +1,7 @@
+import 'package:bookly_clean_arch/Features/home/presentation/manager/cubits/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly_clean_arch/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'best_seller_list_view.dart';
 import 'custom_app_bar.dart';
@@ -15,12 +17,19 @@ class HomeViewBody extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: CustomAppBar(),
+            children: [
+              Padding(padding: EdgeInsets.symmetric(horizontal: 30), child: CustomAppBar()),
+              BlocBuilder<FeaturedBooksCubitCubit, FeaturedBooksState>(
+                builder: (context, state) {
+                  if (state is FeaturedBooksSuccess) {
+                    return FeaturedBooksListView(books: state.books);
+                  } else if (state is FeaturedBooksFailure) {
+                    return Center(child: Text(state.errorMessage));
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
               ),
-              FeaturedBooksListView(),
               SizedBox(height: 50),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),

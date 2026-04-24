@@ -30,7 +30,7 @@ class HomeRemoteDataSoureImpl extends HomeRemoteDataSoure {
     List<BookEntity> books = [];
 
     var data = await apiService.get(
-      endPoint: 'volumes?filter=free-ebooks&q=programming&sorting=newest',
+      endPoint: 'volumes?filter=free-ebooks&q=programming&orderBy=newest',
     );
     getBooksList(data, books);
     await saveData(books, kNewestBox);
@@ -44,6 +44,6 @@ void getBooksList(Map<String, dynamic> data, List<BookEntity> books) {
   }
 }
   Future<void> saveData(List<BookEntity> books,String boxName) async {
-    var box = Hive.box(boxName);
+    var box = Hive.box<BookEntity>(boxName);
     await box.addAll(books);
   }
